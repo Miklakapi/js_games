@@ -1,8 +1,46 @@
 body {
-    background-color: #303030;
     margin: 0;
 }
 
 * {
     box-sizing: border-box;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .app {
+        width: 500px;
+        height: 500px;
+        background-color: yellow;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .header {
+            width: 100%;
+            height: 50px;
+            background-color: red;
+        }
+
+        .area {
+            height: calc(100% - 50px);
+            width: calc(100% - 50px);
+            display: flex;
+            flex-wrap: wrap;
+
+            .square {
+                height: 5%;
+                width: 5%;
+                border: 1px solid black;
+                background-color: green;
+            }
+        }
+    }
 }
