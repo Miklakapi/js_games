@@ -1,9 +1,10 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: path.resolve(__dirname, 'src/main.ts'),
+    entry: path.resolve(__dirname, 'src/main.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'main[contenthash].js',
@@ -34,18 +35,17 @@ module.exports = {
                     },
                 },
             },
-            {
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                use: 'ts-loader',
-            },
         ],
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+        }),
         new HtmlWebpackPlugin({
             title: 'Webpack App',
             filename: 'index.html',
             template: 'src/index.html',
         }),
+    
     ]
 }
