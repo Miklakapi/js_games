@@ -8,13 +8,56 @@ body {
     box-sizing: border-box;
 }
 
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-v-center {
+    align-items: center;
+}
+
+.flex-h-center {
+    justify-content: center;
+}
+
+.flex-h-left {
+    justify-content: left;
+}
+
+.flex-h-right {
+    justify-content: right;
+}
+
 .container {
     width: 100vw;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
+
+    .arrow-wrapper {
+        width: calc((100vw - 750px) / 2);
+        height: 100vh;
+
+        .arrow {
+            height: 100vh;
+            color: white;
+            font-size: 2rem;
+            opacity: 0.1;
+            width: 50px;
+
+            &:hover {
+                opacity: 0.5;
+                background-color: rgba(255, 255, 255, 0.1)
+            }
+        }
+    }
 
     .wrapper {
         width: 750px;
