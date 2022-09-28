@@ -1,17 +1,19 @@
 class AppModel {
     static gameArray = [
         {
-            title: "Snake",
+            id: 'Snake',
+            title: 'SNAKE',
         }, 
         {
-            title: "Minesweeper",
+            id: 'Minesweeper',
+            title: 'MINESWEEPER',
         }
     ];
 
     #activeGameId = 0;
 
     changeGame(direction) {
-        if (direction === "right") {
+        if (direction === 'right') {
             if (this.#activeGameId < AppModel.gameArray.length - 1) {
                 this.#activeGameId++;
             } else {
