@@ -97,6 +97,8 @@ body {
             letter-spacing: 0.2rem;
             text-align: center;
             user-select: none;
+            text-shadow: 6px 4px 6px rgb(0, 0, 0);
+            color: rgba(255, 255, 255, .8);
         }
 
         .app {
@@ -107,6 +109,7 @@ body {
             border-radius: 1rem;
             overflow: hidden;
             flex-wrap: wrap;
+            box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.4);
 
             .play-wrapper {
                 background-color: rgba(255, 255, 255, 0.05);
