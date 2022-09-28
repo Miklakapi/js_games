@@ -21,5 +21,6 @@ $(document).ready(function () {
     const game = $(this).data('game');
     currentGame = new (Games[game])();
 }).on('click', '.arrow', function () {
+    currentGame?.delete();
     currentGame = null;
 });
