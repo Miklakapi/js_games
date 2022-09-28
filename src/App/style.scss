@@ -6,6 +6,7 @@ body {
 
 * {
     box-sizing: border-box;
+    color: white;
 }
 
 .text-left {
@@ -74,7 +75,6 @@ body {
 
         .arrow {
             height: 100vh;
-            color: white;
             font-size: 2rem;
             opacity: 0.1;
             width: 50px;
@@ -95,7 +95,6 @@ body {
             font-weight: bold;
             font-size: 1.5rem;
             letter-spacing: 0.2rem;
-            color: white;
             text-align: center;
             user-select: none;
         }
@@ -119,7 +118,6 @@ body {
                 }
 
                 .play {
-                    color: white;
                     font-size: 5rem;
                     user-select: none;
 
