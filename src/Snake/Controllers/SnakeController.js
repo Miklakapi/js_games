@@ -15,7 +15,7 @@ class SnakeController {
         this.initSnake();
         this.randApple();
 
-        this.#snakeEngine = setInterval(this.runSnake.bind(this), 1000);
+        this.#snakeEngine = setInterval(this.runSnake.bind(this), 150);
     }
 
     initSnake() {
@@ -78,7 +78,12 @@ class SnakeController {
     }
 
     keyPress(key) {
-        console.log(key);
+        const newDirection = SnakeModel.Direction[key];
+        const currentDirection = this.#snakeModel.getDirection();
+        const blockedDirection = {x: -currentDirection.x, y: -currentDirection.y};
+        if (newDirection.x !== blockedDirection.x && newDirection.y !== blockedDirection.y) {
+            this.#snakeModel.setDirection(newDirection);
+        }
     }
 
     changePosition(position, direction) {
