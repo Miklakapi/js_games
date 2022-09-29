@@ -61,7 +61,7 @@ class SnakeModel {
     }
 
     setDirection(direction) {
-        this.#direction = direction;
+        this.#direction = Object.assign({}, direction);
         return this;
     }
 
