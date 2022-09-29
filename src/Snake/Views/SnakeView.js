@@ -80,12 +80,13 @@ class SnakeView {
 
     getRandomEmptySquarePosition() {
         const emptySquares = this.#getEmptySquares();
+        if (emptySquares.length === 0) return false;
         const randomEmptySquare = Number.parseInt(Math.random() * 1000 % emptySquares.length);
         return {x: $(emptySquares[randomEmptySquare]).data('x'), y: $(emptySquares[randomEmptySquare]).data('y')}
     }
 
     #getEmptySquares() {
-        return $('.snake-square').not(`.${SnakeView.SnakeClass.Head}, .${SnakeView.SnakeClass.Tail}`);
+        return $('.snake-square').not(`.${SnakeView.SnakeClass.Head}, .${SnakeView.SnakeClass.Tail}, .${SnakeView.SnakeClass.Apple}`);
     }
 
     #drawHead(position) {

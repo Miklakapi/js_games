@@ -39,12 +39,21 @@ class SnakeController {
             const points = this.#snakeModel.getPoints() + 1;
             this.#snakeModel.setPoints(points);
             this.#snakeView.changePoints(points);
-            // this.randApple();
+            if (!this.randApple()) {
+                this.win();
+                return;
+            }
             this.#snakeView.clearSquare(newPosition);
         }
 
         this.#snakeModel.setHeadPosition(newPosition);
         this.#snakeView.moveHead(newPosition, oldPosition);
+    }
+
+    win() {
+        this.stopSnake();
+        console.log('win');
+        // win todo
     }
 
     lose() {
@@ -59,8 +68,10 @@ class SnakeController {
 
     randApple() {
         const emptySquarePosition = this.#snakeView.getRandomEmptySquarePosition();
+        if (emptySquarePosition === false) return false;
         this.#snakeModel.setApplePosition(emptySquarePosition);
         this.#snakeView.setApplePosition(emptySquarePosition);
+        return true;
     }
 
     keyPress(key) {
