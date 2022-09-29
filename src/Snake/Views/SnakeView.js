@@ -12,7 +12,7 @@ class SnakeView {
 
     constructor(width, height) {
         this.initArea(width, height);
-        this.changeScore(0);
+        this.changePoints(0);
     }
 
     initArea(width, height) {
@@ -48,8 +48,8 @@ class SnakeView {
         });
     }
 
-    changeScore(score) {
-        this.#score.html(score);
+    changePoints(points) {
+        this.#score.html(points);
     }
 
     initSnake(head, body) {
@@ -66,16 +66,16 @@ class SnakeView {
         this.#drawApple(position);
     }
 
-    deleteTail(position) {
+    clearSquare(position) {
         this.#drawGrass(position);
     }
 
     isTail(position) {
-        $(`*[data-x="${position.x}"][data-y="${position.y}"]`).hasClass(SnakeView.SnakeClass.Tail);
+        return $(`*[data-x="${position.x}"][data-y="${position.y}"]`).hasClass(SnakeView.SnakeClass.Tail);
     }
 
     isApple(position) {
-        $(`*[data-x="${position.x}"][data-y="${position.y}"]`).hasClass(SnakeView.SnakeClass.Apple);
+        return $(`*[data-x="${position.x}"][data-y="${position.y}"]`).hasClass(SnakeView.SnakeClass.Apple);
     }
 
     getRandomEmptySquarePosition() {
@@ -103,6 +103,7 @@ class SnakeView {
     #drawGrass(position) {
         $(`*[data-x="${position.x}"][data-y="${position.y}"]`).removeClass(SnakeView.SnakeClass.Head);
         $(`*[data-x="${position.x}"][data-y="${position.y}"]`).removeClass(SnakeView.SnakeClass.Tail);
+        $(`*[data-x="${position.x}"][data-y="${position.y}"]`).removeClass(SnakeView.SnakeClass.Apple);
     }
 
     delete() {
