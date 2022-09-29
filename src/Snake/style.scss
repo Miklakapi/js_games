@@ -18,11 +18,23 @@
     width: 650px;
     height: 650px;
     flex-wrap: wrap;
+    background-image: linear-gradient(to left bottom, #052451, #004a7a, #006f7c, #009056, #79a813);
 
     .snake-square {
         width: 5%;
         height: 5%;
-        background-color: green;
         border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .snake-head {
+        background-color: #A93226;
+    }
+
+    .snake-tail {
+        background-color: #DC7633;
+    }
+
+    .snake-apple {
+        background-image: radial-gradient(circle, #a82b62, #b01d52, #b50f3f, #b7072a, #b51010);
     }
 }
