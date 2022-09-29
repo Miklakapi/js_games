@@ -55,14 +55,12 @@ class SnakeController {
 
     win() {
         this.stopSnake();
-        console.log('win');
-        // win todo
+        this.#snakeView.drawWinScreen();
     }
 
     lose() {
         this.stopSnake();
-        console.log('lose');
-        // lose todo
+        this.#snakeView.drawFailScreen(this.#snakeModel.getPoints());
     }
 
     stopSnake() {

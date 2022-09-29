@@ -19,6 +19,30 @@
     height: 650px;
     flex-wrap: wrap;
     background-image: linear-gradient(to left bottom, #052451, #004a7a, #006f7c, #009056, #79a813);
+    position: relative;
+
+    .snake-opacity-layer {
+        background-color: rgba(0, 0, 0, 0.6);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        flex-wrap: wrap;
+        text-align: center;
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .snake-reload {
+            user-select: none;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
 
     .snake-square {
         width: 5%;

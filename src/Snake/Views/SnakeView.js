@@ -85,6 +85,29 @@ class SnakeView {
         return {x: $(emptySquares[randomEmptySquare]).data('x'), y: $(emptySquares[randomEmptySquare]).data('y')}
     }
 
+    drawFailScreen(score) {
+        this.#area.append(`
+            <div class="snake-opacity-layer d-flex flex-h-center flex-v-center">
+                <div>
+                    <h1>You Lose</h1>
+                    <h4>Your score: ${score}</h4>
+                    <h1 class="snake-reload">&orarr;</h1>
+                </div>
+            </div>
+        `);
+    }
+
+    drawWinScreen() {
+        this.#area.append(`
+            <div class="snake-opacity-layer d-flex flex-h-center flex-v-center">
+                <div>
+                    <h1>You Win</h1>
+                    <h1 class="snake-reload">&orarr;</h1>
+                </div>
+            </div>
+        `);
+    }
+
     #getEmptySquares() {
         return $('.snake-square').not(`.${SnakeView.SnakeClass.Head}, .${SnakeView.SnakeClass.Tail}, .${SnakeView.SnakeClass.Apple}`);
     }
