@@ -34,7 +34,7 @@ class SnakeModel {
     }
 
     getHeadPosition() {
-        return this.#headPosition;
+        return Object.assign({}, this.#headPosition);
     }
 
     setHeadPosition(position) {
@@ -44,7 +44,7 @@ class SnakeModel {
     }
 
     getTailPosition() {
-        return this.#tailPosition;
+        return Object.assign({}, this.#tailPosition);
     }
 
     setTailPosition(position) {
@@ -54,7 +54,7 @@ class SnakeModel {
     }
 
     getDirection() {
-        return this.#direction;
+        return Object.assign({}, this.#direction);
     }
 
     setDirection(direction) {
@@ -72,7 +72,7 @@ class SnakeModel {
     }
 
     getApplePosition() {
-        return this.#applePosition;
+        return Object.assign({}, this.#applePosition);
     }
 
     setApplePosition(position) {
