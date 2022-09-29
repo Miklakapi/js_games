@@ -19,7 +19,7 @@ class SnakeController {
     }
 
     initSnake() {
-        this.#snakeView.initSnake(this.#snakeModel.getHeadPosition(), this.#snakeModel.getTailPosition());
+        this.#snakeView.initSnake(this.#snakeModel.getHeadPosition(), this.#snakeModel.getTailPositions()[0]);
     }
 
     runSnake() {
@@ -44,9 +44,12 @@ class SnakeController {
                 return;
             }
             this.#snakeView.clearSquare(newPosition);
+        } else {
+            this.#snakeView.clearSquare(this.#snakeModel.shiftTailPositions());
         }
 
         this.#snakeModel.setHeadPosition(newPosition);
+        this.#snakeModel.addTailPosition(oldPosition);
         this.#snakeView.moveHead(newPosition, oldPosition);
     }
 
