@@ -18,7 +18,7 @@ class SnakeView {
             <div class="snake-title d-flex flex-v-center flex-h-center">
                 Score:&nbsp;<span class="snake-score"></span>
             </div>
-            <div class="snake-area"></div>
+            <div class="snake-area d-flex"></div>
         `);
         this.#area = $('.snake-area');
         this.#score = $('.snake-score');
@@ -26,7 +26,7 @@ class SnakeView {
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
                 this.#area.append(`
-                    <div class="snake-square" data-x="${x} data-y="${y}">123</div>
+                    <div class="snake-square" data-x="${x} data-y="${y}"></div>
                 `);
             }
         }
