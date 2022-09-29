@@ -2,11 +2,12 @@ import SnakeModel from '../Models/SnakeModel';
 import SnakeView from '../Views/SnakeView';
 
 class SnakeController {
-    #snakeModel = new SnakeModel();
-    #snakeView = new SnakeView();
+    #snakeModel = null;
+    #snakeView = null;
 
-    constructor() {
-        
+    constructor(width, height) {
+        this.#snakeModel = new SnakeModel(width, height);
+        this.#snakeView = new SnakeView(width, height);
     }
 
     delete() {
