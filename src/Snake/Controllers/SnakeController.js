@@ -79,6 +79,7 @@ class SnakeController {
 
     keyPress(key) {
         const newDirection = SnakeModel.Direction[key];
+        if (!newDirection) return;
         const currentDirection = this.#snakeModel.getDirection();
         const blockedDirection = {x: -currentDirection.x, y: -currentDirection.y};
         if (newDirection.x !== blockedDirection.x && newDirection.y !== blockedDirection.y) {
