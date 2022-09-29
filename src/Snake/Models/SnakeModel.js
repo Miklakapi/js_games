@@ -10,7 +10,7 @@ class SnakeModel {
     #width = 0;
     #height = 0;
     #headPosition = {x: 0, y: 0};
-    #tailPosition = {x: 0, y: 0};
+    #tailPositions = [];
     #applePosition = {x: 0, y: 0};
     #points = 0;
 
@@ -21,7 +21,7 @@ class SnakeModel {
         const halfWidth = Number.parseInt(width / 2);
         const halfHeight = Number.parseInt(width / 2);
         this.#headPosition = {x: halfWidth, y: halfHeight};
-        this.#tailPosition = {x: halfWidth - 1, y: halfHeight};
+        this.#tailPositions = [{x: halfWidth - 1, y: halfHeight}];
         this.#direction = SnakeModel.Direction.ArrowRight;
     }
 
@@ -43,13 +43,16 @@ class SnakeModel {
         return this;
     }
 
-    getTailPosition() {
-        return Object.assign({}, this.#tailPosition);
+    getTailPositions() {
+        return Object.assign({}, this.#tailPositions);
     }
 
-    setTailPosition(position) {
-        this.#tailPosition.x = position.x;
-        this.#tailPosition.y = position.y;
+    shiftTailPositions() {
+        return Object.assign({}, this.#tailPositions.shift());
+    }
+
+    addTailPosition(position) {
+        this.#tailPositions.push(Object.assign({}, position));
         return this;
     }
 
