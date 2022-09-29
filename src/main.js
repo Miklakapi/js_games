@@ -1,5 +1,6 @@
 import './App/style.scss';
 import AppController from './App/Controllers/AppController';
+import AppModel from './App/Models/AppModel';
 
 import './Snake/style.scss';
 import SnakeController from './Snake/Controllers/SnakeController';
@@ -19,7 +20,8 @@ $(document).ready(function () {
     const appController = new AppController();
 }).on('click', '.play', function () {
     const game = $(this).data('game');
-    currentGame = new (Games[game])();
+    const gameData = AppModel.GameArray[AppModel.GameArray.findIndex(element => element.id === game)];
+    currentGame = new Games[game](...gameData.constructorValues);
 }).on('click', '.arrow', function () {
     currentGame?.delete();
     currentGame = null;

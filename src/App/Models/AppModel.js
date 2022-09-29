@@ -1,12 +1,14 @@
 class AppModel {
-    static gameArray = [
+    static GameArray = [
         {
             id: 'Snake',
             title: 'SNAKE',
+            constructorValues: [20, 20],
         }, 
         {
             id: 'Minesweeper',
             title: 'MINESWEEPER',
+            constructorValues: [],
         }
     ];
 
@@ -14,7 +16,7 @@ class AppModel {
 
     changeGame(direction) {
         if (direction === 'right') {
-            if (this.#activeGameId < AppModel.gameArray.length - 1) {
+            if (this.#activeGameId < AppModel.GameArray.length - 1) {
                 this.#activeGameId++;
             } else {
                 this.#activeGameId = 0;
@@ -23,14 +25,14 @@ class AppModel {
             if (this.#activeGameId !== 0) {
                 this.#activeGameId--;
             } else {
-                this.#activeGameId = AppModel.gameArray.length - 1;
+                this.#activeGameId = AppModel.GameArray.length - 1;
             }
         }
         return this;
     }
 
     getGame() {
-        return AppModel.gameArray[this.#activeGameId];
+        return AppModel.GameArray[this.#activeGameId];
     }
 }
 
