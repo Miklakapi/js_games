@@ -109,7 +109,19 @@ body {
             border-radius: 1rem;
             overflow: hidden;
             flex-wrap: wrap;
-            box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.4);
+            box-shadow: 10px 10px 5px 0 rgba(0, 0, 0, 0.4);
+
+            .universal-title {
+                background-image: linear-gradient(to left, #343536, #2c2e2f, #252727, #1f2120, #191a18);
+                height: 50px;
+                width: 100%;
+                font-weight: bold;
+                font-size: 1.3rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                text-shadow: 6px 4px 6px rgb(0, 0, 0);
+                color: rgba(255, 255, 255, .9);
+                user-select: none;
+            }
 
             .play-wrapper {
                 background-color: rgba(255, 255, 255, 0.05);

@@ -8,7 +8,7 @@ class AppModel {
         {
             id: 'Minesweeper',
             title: 'MINESWEEPER',
-            constructorValues: [],
+            constructorValues: [20, 20],
         }
     ];
 
