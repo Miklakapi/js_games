@@ -10,12 +10,12 @@ class SnakeView {
     #area = null;
     #keyPressed = false;
 
+    // Init
+
     constructor(width, height) {
         this.initArea(width, height);
         this.changePoints(0);
     }
-
-    // Init
 
     initArea(width, height) {
         this.#app.html('');
@@ -73,7 +73,7 @@ class SnakeView {
     getRandomEmptySquarePosition() {
         const emptySquares = this.#getEmptySquares();
         if (emptySquares.length === 0) return false;
-        const randomEmptySquare = Number.parseInt(Math.random() * 1000 % emptySquares.length);
+        const randomEmptySquare = Math.floor(Math.random() * 1000 % emptySquares.length);
         return {x: $(emptySquares[randomEmptySquare]).data('x'), y: $(emptySquares[randomEmptySquare]).data('y')}
     }
 

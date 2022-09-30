@@ -6,6 +6,8 @@ class SnakeController {
     #snakeView = null;
     #snakeEngine = null;
 
+    // Init
+
     constructor(width, height) {
         this.init(width, height);
     }
@@ -25,6 +27,8 @@ class SnakeController {
     initSnake() {
         this.#snakeView.initSnake(this.#snakeModel.getHeadPosition(), this.#snakeModel.getTailPositions()[0]);
     }
+
+    // Methods
 
     runSnake() {
         const oldPosition = this.#snakeModel.getHeadPosition();
@@ -99,6 +103,8 @@ class SnakeController {
     changePosition(position, direction) {
         return {x: position.x + direction.x, y: position.y + direction.y};
     }
+
+    // Destructor
 
     delete() {
         this.stopSnake();

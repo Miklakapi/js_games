@@ -14,6 +14,8 @@ class SnakeModel {
     #applePosition = {x: 0, y: 0};
     #points = 0;
 
+    // Init
+
     constructor (width, height) {
         this.#height = height;
         this.#width = width;
@@ -24,6 +26,8 @@ class SnakeModel {
         this.#tailPositions = [{x: halfWidth - 1, y: halfHeight}];
         this.#direction = SnakeModel.Direction.ArrowRight;
     }
+
+    // Methods
 
     getWidth() {
         return this.#width;
