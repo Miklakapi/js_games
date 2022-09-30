@@ -142,7 +142,6 @@ class SnakeView {
 
     addReloadHandler(handler) {
         $('.snake-reload').on('click', _ => {
-            console.log(1);
             handler();
         });
     }
