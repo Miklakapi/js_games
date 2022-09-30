@@ -1,12 +1,4 @@
-.snake-title {
-    background-image: linear-gradient(to right, #343536, #2c2e2f, #252727, #1f2120, #191a18);
-    height: 50px;
-    width: 100%;
-    font-weight: bold;
-    font-size: 1.3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    text-shadow: 6px 4px 6px rgb(0, 0, 0);
-    color: rgba(255, 255, 255, .9);
+.universal-title {
 
     .snake-score {
         color: rgba(255, 255, 255, .9);
@@ -30,6 +22,7 @@
         bottom: 0;
         flex-wrap: wrap;
         text-align: center;
+        user-select: none;
 
         h1 {
             font-size: 2.5rem;

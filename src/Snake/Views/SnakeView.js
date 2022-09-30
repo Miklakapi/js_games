@@ -21,7 +21,7 @@ class SnakeView {
         this.#app.html('');
         this.#app.removeClass('flex-v-center');
         this.#app.html(`
-            <div class="snake-title d-flex flex-v-center flex-h-center">
+            <div class="universal-title d-flex flex-v-center flex-h-center">
                 Score:&nbsp;<span class="snake-score"></span>
             </div>
             <div class="snake-area d-flex"></div>
