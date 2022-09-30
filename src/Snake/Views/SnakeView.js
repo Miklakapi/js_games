@@ -36,15 +36,22 @@ class SnakeView {
         }
     }
 
-    addHandlerPressKey(handler) {
+    addPressKeyHandler(handler) {
         $(document).on('keydown', event => {
             if (this.#keyPressed) return;
             this.#keyPressed = true;
             handler(event.key);
         });
 
-        $(document).on('keyup', event => {
+        $(document).on('keyup', _ => {
             this.#keyPressed = false;
+        });
+    }
+
+    addReloadHandler(handler) {
+        $('.snake-reload').on('click', _ => {
+            console.log(1);
+            handler();
         });
     }
 
@@ -85,7 +92,7 @@ class SnakeView {
         return {x: $(emptySquares[randomEmptySquare]).data('x'), y: $(emptySquares[randomEmptySquare]).data('y')}
     }
 
-    drawFailScreen(score) {
+    drawFailScreen(score, handler) {
         this.#area.append(`
             <div class="snake-opacity-layer d-flex flex-h-center flex-v-center">
                 <div>
@@ -95,9 +102,10 @@ class SnakeView {
                 </div>
             </div>
         `);
+        this.addReloadHandler(handler);
     }
 
-    drawWinScreen() {
+    drawWinScreen(handler) {
         this.#area.append(`
             <div class="snake-opacity-layer d-flex flex-h-center flex-v-center">
                 <div>
@@ -106,6 +114,7 @@ class SnakeView {
                 </div>
             </div>
         `);
+        this.addReloadHandler(handler);
     }
 
     #getEmptySquares() {
@@ -125,14 +134,15 @@ class SnakeView {
     }
 
     #drawGrass(position) {
-        $(`*[data-x="${position.x}"][data-y="${position.y}"]`).removeClass(SnakeView.SnakeClass.Head);
-        $(`*[data-x="${position.x}"][data-y="${position.y}"]`).removeClass(SnakeView.SnakeClass.Tail);
-        $(`*[data-x="${position.x}"][data-y="${position.y}"]`).removeClass(SnakeView.SnakeClass.Apple);
+        $(`*[data-x="${position.x}"][data-y="${position.y}"]`).removeClass(SnakeView.SnakeClass.Head)
+            .removeClass(SnakeView.SnakeClass.Tail)
+            .removeClass(SnakeView.SnakeClass.Apple);
     }
 
     delete() {
         $(document).off('keydown');
         $(document).off('keyup');
+        $('.snake-reload').off('click');
     }
 }
 

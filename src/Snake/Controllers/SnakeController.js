@@ -7,10 +7,14 @@ class SnakeController {
     #snakeEngine = null;
 
     constructor(width, height) {
+        this.init(width, height);
+    }
+
+    init(width, height) {
         this.#snakeModel = new SnakeModel(width, height);
         this.#snakeView = new SnakeView(width, height);
 
-        this.#snakeView.addHandlerPressKey(this.keyPress.bind(this));
+        this.#snakeView.addPressKeyHandler(this.keyPress.bind(this));
 
         this.initSnake();
         this.randApple();
@@ -55,16 +59,23 @@ class SnakeController {
 
     win() {
         this.stopSnake();
-        this.#snakeView.drawWinScreen();
+        this.#snakeView.drawWinScreen(this.reset.bind(this));
     }
 
     lose() {
         this.stopSnake();
-        this.#snakeView.drawFailScreen(this.#snakeModel.getPoints());
+        this.#snakeView.drawFailScreen(this.#snakeModel.getPoints(), this.reset.bind(this));
     }
 
     stopSnake() {
         clearInterval(this.#snakeEngine)
+    }
+
+    reset() {
+        const width = this.#snakeModel.getWidth();
+        const height = this.#snakeModel.getHeight();
+        this.#snakeView.delete();
+        this.init(width, height);
     }
 
     randApple() {
