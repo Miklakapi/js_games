@@ -15,6 +15,8 @@ class SnakeView {
         this.changePoints(0);
     }
 
+    // Init
+
     initArea(width, height) {
         this.#app.html('');
         this.#app.removeClass('flex-v-center');
@@ -36,32 +38,15 @@ class SnakeView {
         }
     }
 
-    addPressKeyHandler(handler) {
-        $(document).on('keydown', event => {
-            if (this.#keyPressed) return;
-            this.#keyPressed = true;
-            handler(event.key);
-        });
-
-        $(document).on('keyup', _ => {
-            this.#keyPressed = false;
-        });
-    }
-
-    addReloadHandler(handler) {
-        $('.snake-reload').on('click', _ => {
-            console.log(1);
-            handler();
-        });
-    }
-
-    changePoints(points) {
-        this.#score.html(points);
-    }
-
     initSnake(head, body) {
         this.#drawHead(head);
         this.#drawTail(body);
+    }
+
+    // Methods
+
+    changePoints(points) {
+        this.#score.html(points);
     }
 
     moveHead(newPosition, oldPosition) {
@@ -117,6 +102,8 @@ class SnakeView {
         this.addReloadHandler(handler);
     }
 
+    // Private methods
+
     #getEmptySquares() {
         return $('.snake-square').not(`.${SnakeView.SnakeClass.Head}, .${SnakeView.SnakeClass.Tail}, .${SnakeView.SnakeClass.Apple}`);
     }
@@ -138,6 +125,29 @@ class SnakeView {
             .removeClass(SnakeView.SnakeClass.Tail)
             .removeClass(SnakeView.SnakeClass.Apple);
     }
+
+    // Handlers
+
+    addPressKeyHandler(handler) {
+        $(document).on('keydown', event => {
+            if (this.#keyPressed) return;
+            this.#keyPressed = true;
+            handler(event.key);
+        });
+
+        $(document).on('keyup', _ => {
+            this.#keyPressed = false;
+        });
+    }
+
+    addReloadHandler(handler) {
+        $('.snake-reload').on('click', _ => {
+            console.log(1);
+            handler();
+        });
+    }
+
+    // Destructor
 
     delete() {
         $(document).off('keydown');
