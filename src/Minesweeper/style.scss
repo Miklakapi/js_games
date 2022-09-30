@@ -1,0 +1,53 @@
+.universal-title {
+
+  .minesweeper-score {
+    color: rgba(255, 255, 255, .9);
+  }
+
+  .minesweeper-bombs {
+    color: rgba(255, 255, 255, .9);
+  }
+
+  .minesweeper-flags {
+    color: rgba(255, 255, 255, .9);
+  }
+}
+
+.minesweeper-area {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 650px;
+  height: 650px;
+  flex-wrap: wrap;
+  background-image: linear-gradient(to left bottom, #b1a06e, #ae9c70, #ab9972, #a89573, #a49275);
+  position: relative;
+
+  .minesweeper-opacity-layer {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-wrap: wrap;
+    text-align: center;
+    user-select: none;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .minesweeper-reload {
+      user-select: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .minesweeper-square {
+    width: 5%;
+    height: 5%;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+  }
+}
