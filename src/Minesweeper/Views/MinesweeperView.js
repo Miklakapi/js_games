@@ -1,8 +1,8 @@
 class MinesweeperView {
     static MinesweeperClass = {
         Flag: 'minesweeper-flag',
+        Covered: 'minesweeper-undiscovered',
         Empty: 'minesweeper-empty',
-        Undiscovered: 'minesweeper-undiscovered',
     }
 
     #app = $('.app');
@@ -52,6 +52,14 @@ class MinesweeperView {
         this.#bombs.html(bombs);
     }
 
+    setSquareType(position, type) {
+        $(`*[data-x="${position.x}"][data-y="${position.y}"]`).addClass(type);
+    }
+
+    removeSquareType(position, type) {
+        $(`*[data-x="${position.x}"][data-y="${position.y}"]`).removeClass(type);
+    }
+
     drawFailScreen(score, handler) {
         this.#area.append(`
             <div class="universal-opacity-layer d-flex flex-h-center flex-v-center">
@@ -79,13 +87,47 @@ class MinesweeperView {
 
     // Private methods
 
-    // todo
+    #isFlag(position) {
+        return $(`*[data-x="${position.x}"][data-y="${position.y}"]`).hasClass(MinesweeperView.MinesweeperClass.Flag);
+    }
+
+    #isCovered(position) {
+        return $(`*[data-x="${position.x}"][data-y="${position.y}"]`).hasClass(MinesweeperView.MinesweeperClass.Covered);
+    }
+
+    #isUncovered(position) {
+        const element = $(`*[data-x="${position.x}"][data-y="${position.y}"]`);
+        return !element.hasClass(MinesweeperView.MinesweeperClass.Covered) &&
+            !element.hasClass(MinesweeperView.MinesweeperClass.Empty) &&
+            !element.hasClass(MinesweeperView.MinesweeperClass.Flag);
+    }
 
     // Handlers
 
-    // todo - right click
+    addClickHandler(handler) {
+        this.#area.on('click', event => {
+            const target = $(event.target);
+            const position = { x: target.data('x'), y: target.data('y') }
+            this.#isCovered(position) && handler(position, 'left-click');
+        });
 
-    // todo - left click
+        this.#area.on('contextmenu', event => {
+            event.preventDefault();
+            const target = $(event.target);
+            const position = { x: target.data('x'), y: target.data('y') }
+            if (this.#isCovered(position)) {
+                handler(position, 'flag');
+                return;
+            }
+            if (this.#isFlag(position)) {
+                handler(position, 'un-flag');
+                return;
+            }
+            if (this.#isUncovered(position)) {
+                handler(position, 'big-click');
+            }
+        });
+    }
 
     addReloadHandler(handler) {
         $('.minesweeper-reload').on('click', _ => {
@@ -97,6 +139,8 @@ class MinesweeperView {
 
     delete() {
         $('.minesweeper-reload').off('click');
+        this.#area.off('contextmenu');
+        this.#area.off('click');
     }
 }
 

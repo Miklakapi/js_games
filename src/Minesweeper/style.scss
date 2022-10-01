@@ -10,7 +10,7 @@
 .minesweeper-color-bomb { &:after { content: "💣"; } }
 .minesweeper-color-bomb-miss { &:before { content: "💣"; } &:after { content: "❌"; position: absolute; } }
 .minesweeper-color-flag { border: outset 4px rgb(120, 120, 120) !important; font-size: 1.2rem !important; &:after { content: "🚩"; } }
-.minesweeper-color-hovered { border: outset 4px rgb(120, 120, 120) !important; }
+.minesweeper-color-covered { border: outset 4px rgb(120, 120, 120) !important; }
 
 .minesweeper-title {
 
