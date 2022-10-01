@@ -31,7 +31,7 @@ class MinesweeperView {
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
                 this.#area.append(`
-                    <div class="minesweeper-square" data-x="${x}" data-y="${y}"></div>
+                    <div class="minesweeper-square d-flex flex-h-center flex-v-center minesweeper-color-hovered" data-x="${x}" data-y="${y}"></div>
                 `);
             }
         }
