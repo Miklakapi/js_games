@@ -7,11 +7,13 @@ class MinesweeperView {
 
     #app = $('.app');
     #score = null;
+    #bombs = null;
     #area = null;
 
-    constructor(width, height) {
+    constructor(width, height, bombs) {
         this.initArea(width, height);
         this.changePoints(0);
+        this.changeBombs(bombs);
     }
 
     // Init
@@ -21,12 +23,15 @@ class MinesweeperView {
         this.#app.removeClass('flex-v-center');
         this.#app.html(`
             <div class="minesweeper-title universal-title d-flex flex-v-center flex-h-center">
-                Score:&nbsp;<span class="universal-score"></span>
+                <div class="d-flex flex-v-center flex-h-center">Bombs:&nbsp;<span class="universal-score minesweeper-bombs"></span></div>
+                <div class="d-flex flex-v-center flex-h-center">Score:&nbsp;<span class="universal-score minesweeper-score"></span></div>
+                <div></div>
             </div>
             <div class="universal-area minesweeper-area d-flex"></div>
         `);
         this.#area = $('.minesweeper-area');
         this.#score = $('.minesweeper-score');
+        this.#bombs = $('.minesweeper-bombs');
 
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
@@ -41,6 +46,10 @@ class MinesweeperView {
 
     changePoints(points) {
         this.#score.html(points);
+    }
+
+    changeBombs(bombs) {
+        this.#bombs.html(bombs);
     }
 
     drawFailScreen(score, handler) {

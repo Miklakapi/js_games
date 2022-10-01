@@ -3,7 +3,7 @@ class AppModel {
         {
             id: 'Minesweeper',
             title: 'MINESWEEPER',
-            constructorValues: [20, 20],
+            constructorValues: [20, 20, 20],
         },
         {
             id: 'Snake',

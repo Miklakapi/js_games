@@ -7,13 +7,13 @@ class MinesweeperController {
 
     // Init
 
-    constructor(width, height) {
-        this.init(width, height);
+    constructor(width, height, bombs) {
+        this.init(width, height, bombs);
     }
 
-    init(width, height) {
-        this.#minesweeperModel = new MinesweeperModel(width, height);
-        this.#minesweeperView = new MinesweeperView(width, height);
+    init(width, height, bombs) {
+        this.#minesweeperModel = new MinesweeperModel(width, height, bombs);
+        this.#minesweeperView = new MinesweeperView(width, height, bombs);
     }
 
     // Methods
