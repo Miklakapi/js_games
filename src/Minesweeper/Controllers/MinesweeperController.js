@@ -29,8 +29,9 @@ class MinesweeperController {
     reset() {
         const width = this.#minesweeperModel.getWidth();
         const height = this.#minesweeperModel.getHeight();
+        const bombs = this.#minesweeperModel.getBombs();
         this.delete();
-        this.init(width, height);
+        this.init(width, height, bombs);
     }
 
     // Destructor

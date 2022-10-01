@@ -58,7 +58,7 @@ class MinesweeperView {
                 <div>
                     <h1>You Lose</h1>
                     <h4>Your score: ${score}</h4>
-                    <h1 class="universal-reload">&orarr;</h1>
+                    <h1 class="universal-reload minesweeper-reload">&orarr;</h1>
                 </div>
             </div>
         `);
@@ -70,7 +70,7 @@ class MinesweeperView {
             <div class="universal-opacity-layer d-flex flex-h-center flex-v-center">
                 <div>
                     <h1>You Win</h1>
-                    <h1 class="universal-reload">&orarr;</h1>
+                    <h1 class="universal-reload minesweeper-reload">&orarr;</h1>
                 </div>
             </div>
         `);
