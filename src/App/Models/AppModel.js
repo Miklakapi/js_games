@@ -1,13 +1,13 @@
 class AppModel {
     static GameArray = [
         {
-            id: 'Snake',
-            title: 'SNAKE',
-            constructorValues: [20, 20],
-        }, 
-        {
             id: 'Minesweeper',
             title: 'MINESWEEPER',
+            constructorValues: [20, 20],
+        },
+        {
+            id: 'Snake',
+            title: 'SNAKE',
             constructorValues: [20, 20],
         }
     ];
