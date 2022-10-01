@@ -22,9 +22,9 @@ class SnakeView {
         this.#app.removeClass('flex-v-center');
         this.#app.html(`
             <div class="universal-title d-flex flex-v-center flex-h-center">
-                Score:&nbsp;<span class="snake-score"></span>
+                Score:&nbsp;<span class="universal-score snake-score"></span>
             </div>
-            <div class="snake-area d-flex"></div>
+            <div class="universal-area snake-area d-flex"></div>
         `);
         this.#area = $('.snake-area');
         this.#score = $('.snake-score');
@@ -32,7 +32,7 @@ class SnakeView {
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
                 this.#area.append(`
-                    <div class="snake-square" data-x="${x}" data-y="${y}"></div>
+                    <div class="universal-square snake-square" data-x="${x}" data-y="${y}"></div>
                 `);
             }
         }
@@ -79,11 +79,11 @@ class SnakeView {
 
     drawFailScreen(score, handler) {
         this.#area.append(`
-            <div class="snake-opacity-layer d-flex flex-h-center flex-v-center">
+            <div class="universal-opacity-layer d-flex flex-h-center flex-v-center">
                 <div>
                     <h1>You Lose</h1>
                     <h4>Your score: ${score}</h4>
-                    <h1 class="snake-reload">&orarr;</h1>
+                    <h1 class="universal-reload snake-reload">&orarr;</h1>
                 </div>
             </div>
         `);
@@ -92,10 +92,10 @@ class SnakeView {
 
     drawWinScreen(handler) {
         this.#area.append(`
-            <div class="snake-opacity-layer d-flex flex-h-center flex-v-center">
+            <div class="universal-opacity-layer d-flex flex-h-center flex-v-center">
                 <div>
                     <h1>You Win</h1>
-                    <h1 class="snake-reload">&orarr;</h1>
+                    <h1 class="universal-reload snake-reload">&orarr;</h1>
                 </div>
             </div>
         `);
@@ -121,7 +121,8 @@ class SnakeView {
     }
 
     #drawGrass(position) {
-        $(`*[data-x="${position.x}"][data-y="${position.y}"]`).removeClass(SnakeView.SnakeClass.Head)
+        $(`*[data-x="${position.x}"][data-y="${position.y}"]`)
+            .removeClass(SnakeView.SnakeClass.Head)
             .removeClass(SnakeView.SnakeClass.Tail)
             .removeClass(SnakeView.SnakeClass.Apple);
     }

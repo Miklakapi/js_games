@@ -20,10 +20,10 @@ class MinesweeperView {
         this.#app.html('');
         this.#app.removeClass('flex-v-center');
         this.#app.html(`
-            <div class="universal-title d-flex flex-v-center flex-h-center">
-                Score:&nbsp;<span class="minesweeper-score"></span>
+            <div class="minesweeper-title universal-title d-flex flex-v-center flex-h-center">
+                Score:&nbsp;<span class="universal-score"></span>
             </div>
-            <div class="minesweeper-area d-flex"></div>
+            <div class="universal-area minesweeper-area d-flex"></div>
         `);
         this.#area = $('.minesweeper-area');
         this.#score = $('.minesweeper-score');
@@ -31,7 +31,7 @@ class MinesweeperView {
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
                 this.#area.append(`
-                    <div class="minesweeper-square d-flex flex-h-center flex-v-center minesweeper-color-hovered" data-x="${x}" data-y="${y}"></div>
+                    <div class="minesweeper-square universal-square d-flex flex-h-center flex-v-center minesweeper-color-hovered" data-x="${x}" data-y="${y}"></div>
                 `);
             }
         }
@@ -43,20 +43,13 @@ class MinesweeperView {
         this.#score.html(points);
     }
 
-    getRandomEmptySquarePosition() {
-        const emptySquares = this.#getEmptySquares();
-        if (emptySquares.length === 0) return false;
-        const randomEmptySquare = Number.parseInt(Math.random() * 1000 % emptySquares.length);
-        return {x: $(emptySquares[randomEmptySquare]).data('x'), y: $(emptySquares[randomEmptySquare]).data('y')}
-    }
-
     drawFailScreen(score, handler) {
         this.#area.append(`
-            <div class="minesweeper-opacity-layer d-flex flex-h-center flex-v-center">
+            <div class="universal-opacity-layer d-flex flex-h-center flex-v-center">
                 <div>
                     <h1>You Lose</h1>
                     <h4>Your score: ${score}</h4>
-                    <h1 class="minesweeper-reload">&orarr;</h1>
+                    <h1 class="universal-reload">&orarr;</h1>
                 </div>
             </div>
         `);
@@ -65,10 +58,10 @@ class MinesweeperView {
 
     drawWinScreen(handler) {
         this.#area.append(`
-            <div class="minesweeper-opacity-layer d-flex flex-h-center flex-v-center">
+            <div class="universal-opacity-layer d-flex flex-h-center flex-v-center">
                 <div>
                     <h1>You Win</h1>
-                    <h1 class="minesweeper-reload">&orarr;</h1>
+                    <h1 class="universal-reload">&orarr;</h1>
                 </div>
             </div>
         `);
@@ -77,9 +70,7 @@ class MinesweeperView {
 
     // Private methods
 
-    #getEmptySquares() {
-        return $('.snake-square').not(`.${SnakeView.SnakeClass.Head}, .${SnakeView.SnakeClass.Tail}, .${SnakeView.SnakeClass.Apple}`);
-    }
+    // todo
 
     // Handlers
 

@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: #1b1a1a;
+    overflow: hidden;
 }
 
 * {
@@ -121,6 +122,47 @@ body {
                 text-shadow: 6px 4px 6px rgb(0, 0, 0);
                 color: rgba(255, 255, 255, .9);
                 user-select: none;
+
+                .universal-score {
+                    color: rgba(255, 255, 255, .9);
+                }
+            }
+
+            .universal-area {
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                width: 650px;
+                height: 650px;
+                flex-wrap: wrap;
+                position: relative;
+
+                .universal-opacity-layer {
+                    background-color: rgba(0, 0, 0, 0.5);
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    flex-wrap: wrap;
+                    text-align: center;
+                    user-select: none;
+
+                    h1 {
+                        font-size: 2.5rem;
+                    }
+
+                    .universal-reload {
+                        user-select: none;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .universal-square {
+                    width: 5%;
+                    height: 5%;
+                }
             }
 
             .play-wrapper {
