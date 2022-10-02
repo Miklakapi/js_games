@@ -1,8 +1,12 @@
 class MinesweeperView {
     static MinesweeperClass = {
-        Flag: 'minesweeper-flag',
-        Covered: 'minesweeper-undiscovered',
-        Empty: 'minesweeper-empty',
+        Flag: 'minesweeper-color-flag',
+        Covered: 'minesweeper-color-covered',
+        Empty: 'minesweeper-color-0',
+        Explode: 'minesweeper-color-bomb-explode',
+        Bomb: 'minesweeper-color-bomb',
+        Miss: 'minesweeper-color-bomb-miss',
+        UncoveredPattern: 'minesweeper-color-',
     }
 
     #app = $('.app');
@@ -36,7 +40,7 @@ class MinesweeperView {
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
                 this.#area.append(`
-                    <div class="minesweeper-square universal-square d-flex flex-h-center flex-v-center minesweeper-color-hovered" data-x="${x}" data-y="${y}"></div>
+                    <div class="minesweeper-square universal-square d-flex flex-h-center flex-v-center ${MinesweeperView.MinesweeperClass.Covered}" data-x="${x}" data-y="${y}"></div>
                 `);
             }
         }
@@ -87,19 +91,8 @@ class MinesweeperView {
 
     // Private methods
 
-    #isFlag(position) {
-        return $(`*[data-x="${position.x}"][data-y="${position.y}"]`).hasClass(MinesweeperView.MinesweeperClass.Flag);
-    }
-
-    #isCovered(position) {
-        return $(`*[data-x="${position.x}"][data-y="${position.y}"]`).hasClass(MinesweeperView.MinesweeperClass.Covered);
-    }
-
-    #isUncovered(position) {
-        const element = $(`*[data-x="${position.x}"][data-y="${position.y}"]`);
-        return !element.hasClass(MinesweeperView.MinesweeperClass.Covered) &&
-            !element.hasClass(MinesweeperView.MinesweeperClass.Empty) &&
-            !element.hasClass(MinesweeperView.MinesweeperClass.Flag);
+    #checkSquareClass(position, minesweeperClass) {
+        return $(`*[data-x="${position.x}"][data-y="${position.y}"]`).hasClass(minesweeperClass);
     }
 
     // Handlers
@@ -108,22 +101,22 @@ class MinesweeperView {
         this.#area.on('click', event => {
             const target = $(event.target);
             const position = { x: target.data('x'), y: target.data('y') }
-            this.#isCovered(position) && handler(position, 'left-click');
+            this.#checkSquareClass(position, MinesweeperView.MinesweeperClass.Covered) && handler(position, 'left-click');
         });
 
         this.#area.on('contextmenu', event => {
             event.preventDefault();
             const target = $(event.target);
             const position = { x: target.data('x'), y: target.data('y') }
-            if (this.#isCovered(position)) {
+            if (this.#checkSquareClass(position, MinesweeperView.MinesweeperClass.Covered)) {
                 handler(position, 'flag');
                 return;
             }
-            if (this.#isFlag(position)) {
+            if (this.#checkSquareClass(position, MinesweeperView.MinesweeperClass.Flag)) {
                 handler(position, 'un-flag');
                 return;
             }
-            if (this.#isUncovered(position)) {
+            if (!this.#checkSquareClass(position, MinesweeperView.MinesweeperClass.Empty)) {
                 handler(position, 'big-click');
             }
         });
