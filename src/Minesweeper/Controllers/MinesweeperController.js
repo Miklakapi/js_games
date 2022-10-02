@@ -26,7 +26,7 @@ class MinesweeperController {
     lose(position) {
         this.#minesweeperView.removeSquareType(position, MinesweeperView.MinesweeperClass.Covered);
         this.#minesweeperView.setSquareType(position, MinesweeperView.MinesweeperClass.Explode);
-        this.#minesweeperModel.setSquare(MinesweeperModel.MinesweeperSquareType.Explode);
+        this.#minesweeperModel.setSquare(position, MinesweeperModel.MinesweeperSquareType.Explode);
         this.displayAllBombs();
         this.#minesweeperView.drawFailScreen(this.#minesweeperModel.getPoints(), this.reset.bind(this));
     }
@@ -123,7 +123,22 @@ class MinesweeperController {
     }
 
     displayAllBombs() {
+        for (let y = 0; y < this.#minesweeperModel.getHeight(); y++) {
+            for (let x = 0; x < this.#minesweeperModel.getWidth(); x++) {
+                const position = { x, y}
+                const isBomb = this.#minesweeperModel.getSquare(position) === MinesweeperModel.MinesweeperSquareType.Bomb;
+                const isFlag = this.#minesweeperView.checkSquareClass(position, MinesweeperView.MinesweeperClass.Flag);
 
+                if (isBomb && isFlag) continue;
+                if (isBomb) {
+                    this.#minesweeperView.removeSquareType(position, MinesweeperView.MinesweeperClass.Covered);
+                    this.#minesweeperView.setSquareType(position, MinesweeperView.MinesweeperClass.Bomb);
+                } else if (isFlag) {
+                    this.#minesweeperView.removeSquareType(position, MinesweeperView.MinesweeperClass.Flag);
+                    this.#minesweeperView.setSquareType(position, MinesweeperView.MinesweeperClass.Miss);
+                }
+            }
+        }
     }
 
     // Destructor
