@@ -14,6 +14,7 @@ class MinesweeperController {
     init(width, height, bombs) {
         this.#minesweeperModel = new MinesweeperModel(width, height, bombs);
         this.#minesweeperView = new MinesweeperView(width, height, bombs);
+        this.#minesweeperView.addClickHandler(this.click.bind(this));
     }
 
     // Methods
@@ -32,6 +33,10 @@ class MinesweeperController {
         const bombs = this.#minesweeperModel.getBombs();
         this.delete();
         this.init(width, height, bombs);
+    }
+
+    click(position, type) {
+        console.log(position, type);
     }
 
     // Destructor
