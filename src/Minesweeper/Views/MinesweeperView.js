@@ -9,6 +9,13 @@ class MinesweeperView {
         UncoveredPattern: 'minesweeper-color-',
     }
 
+    static MinesweeperClickType = {
+        LeftClick: 'leftClick',
+        Flag: 'flag',
+        UnFlag: 'unFlag',
+        BigClick: 'bigClick'
+    }
+
     #app = $('.app');
     #score = null;
     #bombs = null;
@@ -89,9 +96,7 @@ class MinesweeperView {
         this.addReloadHandler(handler);
     }
 
-    // Private methods
-
-    #checkSquareClass(position, minesweeperClass) {
+    checkSquareClass(position, minesweeperClass) {
         return $(`*[data-x="${position.x}"][data-y="${position.y}"]`).hasClass(minesweeperClass);
     }
 
@@ -101,23 +106,23 @@ class MinesweeperView {
         this.#area.on('click', event => {
             const target = $(event.target);
             const position = { x: target.data('x'), y: target.data('y') }
-            this.#checkSquareClass(position, MinesweeperView.MinesweeperClass.Covered) && handler(position, 'left-click');
+            this.checkSquareClass(position, MinesweeperView.MinesweeperClass.Covered) && handler(position, MinesweeperView.MinesweeperClickType.LeftClick);
         });
 
         this.#area.on('contextmenu', event => {
             event.preventDefault();
             const target = $(event.target);
             const position = { x: target.data('x'), y: target.data('y') }
-            if (this.#checkSquareClass(position, MinesweeperView.MinesweeperClass.Covered)) {
-                handler(position, 'flag');
+            if (this.checkSquareClass(position, MinesweeperView.MinesweeperClass.Covered)) {
+                handler(position, MinesweeperView.MinesweeperClickType.Flag);
                 return;
             }
-            if (this.#checkSquareClass(position, MinesweeperView.MinesweeperClass.Flag)) {
-                handler(position, 'un-flag');
+            if (this.checkSquareClass(position, MinesweeperView.MinesweeperClass.Flag)) {
+                handler(position, MinesweeperView.MinesweeperClickType.UnFlag);
                 return;
             }
-            if (!this.#checkSquareClass(position, MinesweeperView.MinesweeperClass.Empty)) {
-                handler(position, 'big-click');
+            if (!this.checkSquareClass(position, MinesweeperView.MinesweeperClass.Empty)) {
+                handler(position, MinesweeperView.MinesweeperClickType.BigClick);
             }
         });
     }
