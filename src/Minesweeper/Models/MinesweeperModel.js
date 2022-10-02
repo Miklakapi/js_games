@@ -1,8 +1,15 @@
 class MinesweeperModel {
+    static MinesweeperSquareType = {
+        Bomb: '*',
+        Empty: 'o',
+        Explode: '@',
+    }
+
     #area = [];
     #width = 0;
     #height = 0;
     #points = 0;
+    #maxBombs = 0;
     #bombs = 0;
 
     // Init
@@ -11,6 +18,7 @@ class MinesweeperModel {
         this.#height = height;
         this.#width = width;
         this.#bombs = bombs;
+        this.#maxBombs = bombs;
         this.initEmptyArea();
         this.initBombs();
         this.initNumbers();
@@ -20,7 +28,7 @@ class MinesweeperModel {
         for (let y = 0; y < this.#height; y++) {
             this.#area.push([]);
             for (let x = 0; x < this.#width; x++) {
-                this.#area[y].push('0');
+                this.#area[y].push(MinesweeperModel.MinesweeperSquareType.Empty);
             }
         }
     }
@@ -37,7 +45,7 @@ class MinesweeperModel {
             for (let x = 0; x < this.#width; x++) {
                 let counter = 0;
                 const position = { x, y };
-                if (this.getSquare(position) === '*') continue;
+                if (this.getSquare(position) === MinesweeperModel.MinesweeperSquareType.Bomb) continue;
 
                 for (const positionY of positions) {
                     for (const positionX of positions) {
@@ -47,11 +55,11 @@ class MinesweeperModel {
 
                             if (checkedX < 0 || checkedY < 0 || checkedX >= this.#width || checkedY >= this.#height) continue;
 
-                            this.getSquare({ x: checkedX, y: checkedY}) === '*' && counter++;
+                            this.getSquare({ x: checkedX, y: checkedY}) === MinesweeperModel.MinesweeperSquareType.Bomb && counter++;
                         }
                     }
                 }
-                this.setSquare(position, counter);
+                this.setSquare(position, counter === 0 ? 'o' : counter);
             }
         }
     }
@@ -85,6 +93,10 @@ class MinesweeperModel {
         return this.#bombs;
     }
 
+    getMaxBombs() {
+        return this.#maxBombs;
+    }
+
     getPoints() {
         return this.#points;
     }
@@ -112,8 +124,8 @@ class MinesweeperModel {
             position.x = Math.floor(Math.random() * this.#width);
             position.y = Math.floor(Math.random() * this.#height);
 
-            if (this.getSquare(position) === '0') {
-                this.setSquare(position, '*');
+            if (this.getSquare(position) === MinesweeperModel.MinesweeperSquareType.Empty) {
+                this.setSquare(position, MinesweeperModel.MinesweeperSquareType.Bomb);
                 break;
             }
         }
