@@ -102,7 +102,27 @@ class SnakeView {
         this.addReloadHandler(handler);
     }
 
-    // Private methods
+    // Handlers
+
+    addPressKeyHandler(handler) {
+        $(document).on('keydown', event => {
+            if (this.#keyPressed) return;
+            this.#keyPressed = true;
+            handler(event.key);
+        });
+
+        $(document).on('keyup', _ => {
+            this.#keyPressed = false;
+        });
+    }
+
+    addReloadHandler(handler) {
+        $('.snake-reload').on('click', _ => {
+            handler();
+        });
+    }
+
+    // Private
 
     #getEmptySquares() {
         return $('.snake-square').not(`.${SnakeView.SnakeClass.Head}, .${SnakeView.SnakeClass.Tail}, .${SnakeView.SnakeClass.Apple}`);
@@ -125,26 +145,6 @@ class SnakeView {
             .removeClass(SnakeView.SnakeClass.Head)
             .removeClass(SnakeView.SnakeClass.Tail)
             .removeClass(SnakeView.SnakeClass.Apple);
-    }
-
-    // Handlers
-
-    addPressKeyHandler(handler) {
-        $(document).on('keydown', event => {
-            if (this.#keyPressed) return;
-            this.#keyPressed = true;
-            handler(event.key);
-        });
-
-        $(document).on('keyup', _ => {
-            this.#keyPressed = false;
-        });
-    }
-
-    addReloadHandler(handler) {
-        $('.snake-reload').on('click', _ => {
-            handler();
-        });
     }
 
     // Destructor

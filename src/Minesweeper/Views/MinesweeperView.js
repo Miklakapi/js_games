@@ -21,13 +21,13 @@ class MinesweeperView {
     #bombs = null;
     #area = null;
 
+    // Init
+
     constructor(width, height, bombs) {
         this.initArea(width, height);
         this.changePoints(0);
         this.changeBombs(bombs);
     }
-
-    // Init
 
     initArea(width, height) {
         this.#app.html('');

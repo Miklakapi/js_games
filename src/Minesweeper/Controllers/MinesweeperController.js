@@ -14,24 +14,24 @@ class MinesweeperController {
     init(width, height, bombs) {
         this.#minesweeperModel = new MinesweeperModel(width, height, bombs);
         this.#minesweeperView = new MinesweeperView(width, height, bombs);
-        this.#minesweeperView.addClickHandler(this.click.bind(this));
+        this.#minesweeperView.addClickHandler(this.#click.bind(this));
     }
 
-    // Methods
+    // Private
 
-    win() {
-        this.#minesweeperView.drawWinScreen(this.reset.bind(this));
+    #win() {
+        this.#minesweeperView.drawWinScreen(this.#reset.bind(this));
     }
 
-    lose(position) {
+    #lose(position) {
         this.#minesweeperView.removeSquareType(position, MinesweeperView.MinesweeperClass.Covered);
         this.#minesweeperView.setSquareType(position, MinesweeperView.MinesweeperClass.Explode);
         this.#minesweeperModel.setSquare(position, MinesweeperModel.MinesweeperSquareType.Explode);
-        this.displayAllBombs();
-        this.#minesweeperView.drawFailScreen(this.#minesweeperModel.getPoints(), this.reset.bind(this));
+        this.#displayAllBombs();
+        this.#minesweeperView.drawFailScreen(this.#minesweeperModel.getPoints(), this.#reset.bind(this));
     }
 
-    reset() {
+    #reset() {
         const width = this.#minesweeperModel.getWidth();
         const height = this.#minesweeperModel.getHeight();
         const bombs = this.#minesweeperModel.getMaxBombs();
@@ -39,9 +39,9 @@ class MinesweeperController {
         this.init(width, height, bombs);
     }
 
-    click(position, type) {
+    #click(position, type) {
         if (type === MinesweeperView.MinesweeperClickType.LeftClick) {
-            this.leftClick(position);
+            this.#leftClick(position);
         } else if (type === MinesweeperView.MinesweeperClickType.Flag) {
             const bombs = this.#minesweeperModel.getBombs() - 1;
             if (bombs < 0) return;
@@ -57,7 +57,7 @@ class MinesweeperController {
             this.#minesweeperView.setSquareType(position, MinesweeperView.MinesweeperClass.Covered);
         } else {
             const bombs = this.#minesweeperModel.getSquare(position);
-            if (bombs !== this.countFlags(position)) return;
+            if (bombs > this.#countFlags(position)) return;
             const positions = [-1, 0, 1];
             for (const y of positions) {
                 for (const x of positions) {
@@ -67,7 +67,7 @@ class MinesweeperController {
                         if (checked.x < 0 || checked.y < 0 || checked.x >= this.#minesweeperModel.getWidth() || checked.y >= this.#minesweeperModel.getHeight()) continue;
                         if (!this.#minesweeperView.checkSquareClass(checked, MinesweeperView.MinesweeperClass.Flag) &&
                             this.#minesweeperView.checkSquareClass(checked, MinesweeperView.MinesweeperClass.Covered)) {
-                            this.leftClick(checked);
+                            this.#leftClick(checked);
                         }
                     }
                 }
@@ -75,10 +75,10 @@ class MinesweeperController {
         }
     }
 
-    leftClick(position) {
+    #leftClick(position) {
         const type = this.#minesweeperModel.getSquare(position);
         if (type === MinesweeperModel.MinesweeperSquareType.Bomb) {
-            this.lose(position);
+            this.#lose(position);
             return;
         }
         this.#minesweeperView.removeSquareType(position, MinesweeperView.MinesweeperClass.Covered);
@@ -96,17 +96,17 @@ class MinesweeperController {
 
                         if (checked.x < 0 || checked.y < 0 || checked.x >= this.#minesweeperModel.getWidth() || checked.y >= this.#minesweeperModel.getHeight()) continue;
                         if (this.#minesweeperView.checkSquareClass(checked, MinesweeperView.MinesweeperClass.Covered)) {
-                            this.leftClick(checked);
+                            this.#leftClick(checked);
                         }
                     }
                 }
             }
         }
 
-        if (points === this.#minesweeperModel.getWidth() * this.#minesweeperModel.getHeight() - this.#minesweeperModel.getMaxBombs()) this.win();
+        if (points === this.#minesweeperModel.getWidth() * this.#minesweeperModel.getHeight() - this.#minesweeperModel.getMaxBombs()) this.#win();
     }
 
-    countFlags(position) {
+    #countFlags(position) {
         const positions = [-1, 0, 1];
         let flags = 0;
         for (const y of positions) {
@@ -122,7 +122,7 @@ class MinesweeperController {
         return flags;
     }
 
-    displayAllBombs() {
+    #displayAllBombs() {
         for (let y = 0; y < this.#minesweeperModel.getHeight(); y++) {
             for (let x = 0; x < this.#minesweeperModel.getWidth(); x++) {
                 const position = { x, y}

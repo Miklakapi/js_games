@@ -16,12 +16,12 @@ class SnakeController {
         this.#snakeModel = new SnakeModel(width, height);
         this.#snakeView = new SnakeView(width, height);
 
-        this.#snakeView.addPressKeyHandler(this.keyPress.bind(this));
+        this.#snakeView.addPressKeyHandler(this.#keyPress.bind(this));
 
         this.initSnake();
-        this.randApple();
+        this.#randApple();
 
-        this.#snakeEngine = setInterval(this.runSnake.bind(this), 150);
+        this.#snakeEngine = setInterval(this.#runSnake.bind(this), 150);
     }
 
     initSnake() {
@@ -30,15 +30,15 @@ class SnakeController {
 
     // Methods
 
-    runSnake() {
+    #runSnake() {
         const oldPosition = this.#snakeModel.getHeadPosition();
-        const newPosition = this.changePosition(oldPosition, this.#snakeModel.getDirection());
+        const newPosition = this.#changePosition(oldPosition, this.#snakeModel.getDirection());
 
         // Lose
         if (this.#snakeView.isTail(newPosition) || newPosition.x < 0 || 
         newPosition.x >= this.#snakeModel.getWidth() || newPosition.y < 0 || 
         newPosition.y >= this.#snakeModel.getHeight()) {
-            this.lose();
+            this.#lose();
             return;
         }
 
@@ -47,8 +47,8 @@ class SnakeController {
             const points = this.#snakeModel.getPoints() + 1;
             this.#snakeModel.setPoints(points);
             this.#snakeView.changePoints(points);
-            if (!this.randApple()) {
-                this.win();
+            if (!this.#randApple()) {
+                this.#win();
                 return;
             }
             this.#snakeView.clearSquare(newPosition);
@@ -61,28 +61,28 @@ class SnakeController {
         this.#snakeView.moveHead(newPosition, oldPosition);
     }
 
-    win() {
-        this.stopSnake();
-        this.#snakeView.drawWinScreen(this.reset.bind(this));
+    #win() {
+        this.#stopSnake();
+        this.#snakeView.drawWinScreen(this.#reset.bind(this));
     }
 
-    lose() {
-        this.stopSnake();
-        this.#snakeView.drawFailScreen(this.#snakeModel.getPoints(), this.reset.bind(this));
+    #lose() {
+        this.#stopSnake();
+        this.#snakeView.drawFailScreen(this.#snakeModel.getPoints(), this.#reset.bind(this));
     }
 
-    stopSnake() {
+    #stopSnake() {
         clearInterval(this.#snakeEngine)
     }
 
-    reset() {
+    #reset() {
         const width = this.#snakeModel.getWidth();
         const height = this.#snakeModel.getHeight();
         this.#snakeView.delete();
         this.init(width, height);
     }
 
-    randApple() {
+    #randApple() {
         const emptySquarePosition = this.#snakeView.getRandomEmptySquarePosition();
         if (emptySquarePosition === false) return false;
         this.#snakeModel.setApplePosition(emptySquarePosition);
@@ -90,7 +90,7 @@ class SnakeController {
         return true;
     }
 
-    keyPress(key) {
+    #keyPress(key) {
         const newDirection = SnakeModel.Direction[key];
         if (!newDirection) return;
         const currentDirection = this.#snakeModel.getDirection();
@@ -100,14 +100,14 @@ class SnakeController {
         }
     }
 
-    changePosition(position, direction) {
+    #changePosition(position, direction) {
         return {x: position.x + direction.x, y: position.y + direction.y};
     }
 
     // Destructor
 
     delete() {
-        this.stopSnake();
+        this.#stopSnake();
         this.#snakeView.delete();
     }
 }

@@ -14,6 +14,8 @@ class AppModel {
 
     #activeGameId = 0;
 
+    // Methods
+
     changeGame(direction) {
         if (direction === 'right') {
             if (this.#activeGameId < AppModel.GameArray.length - 1) {

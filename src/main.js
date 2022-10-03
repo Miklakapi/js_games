@@ -8,7 +8,6 @@ import SnakeController from './Snake/Controllers/SnakeController';
 import './Minesweeper/style.scss';
 import MinesweeperController from './Minesweeper/Controllers/MinesweeperController';
 
-
 const Games = {
     Minesweeper: MinesweeperController,
     Snake: SnakeController
