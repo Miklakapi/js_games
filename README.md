@@ -19,8 +19,8 @@ A simple game application.
 A simple application with games. It allows you to easily create new games using the MVC pattern.
 
 <p>
-    <img width="50%" src="https://github.com/Miklakapi/js_games/blob/master/README_IMAGES/Minesweeper.png">
-    <img width="50%" src="https://github.com/Miklakapi/js_games/blob/master/README_IMAGES/Snake.png">
+    <img width="49%" src="https://github.com/Miklakapi/js_games/blob/master/README_IMAGES/Minesweeper.png">
+    <img width="49%" src="https://github.com/Miklakapi/js_games/blob/master/README_IMAGES/Snake.png">
 </p>
 
 ## Technologies
