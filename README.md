@@ -6,7 +6,7 @@
 ![version](https://img.shields.io/badge/version-1.0.0-success)
 ![status](https://img.shields.io/badge/status-production-green)
 
-A simple game application with the ability to easily create games using the MVC pattern.
+A simple game application.
 
 ## Table of Contents
 * [General info](#general-info)
@@ -16,7 +16,7 @@ A simple game application with the ability to easily create games using the MVC 
 * [Status](#status)
 
 ## General info
-##########
+A simple application with games. It allows you to easily create new games using the MVC pattern.
 
 ## Technologies
 Project is created with:
@@ -28,7 +28,9 @@ Project is created with:
 2. An application has been generated in catalog ```dist```
 
 ## Features
-##########
+- Easy to add games
+- Change games without reloading the page
+- Simple HTML pattern
 
 ## Status
 The project's development has been completed.
